@@ -1,55 +1,55 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+  <div>
+    <div class="container mb-3" v-show="disconnected">
+      <div class="row row-cols-2 justify-content-center">
+        <div class="col alignLink">
+          <router-link class="linkRouter" to="/" >
+            Home
+          </router-link>
+        </div>
+        <div class="col">
+          <router-link
+            class="linkRouter"
+            to="/register"
+          >
+            Registro
+          </router-link>
+        </div>
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view/>
-    </v-main>
-  </v-app>
+    </div>
+    <router-view />
+  </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 
 export default {
-  name: 'App',
-
-  data: () => ({
-    //
-  }),
+  name: "App",
+  computed: {
+    ...mapState(["disconnected"]),
+  },
 };
 </script>
+
+<style>
+@import "~vue-snotify/styles/material.css";
+
+body {
+  background: url("./assets/img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+.linkRouter {
+  text-decoration: none;
+  color: white;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  font-size: 18px;
+}
+.alignLink {
+  text-align: right;
+  border-right: 1px solid rgb(244, 247, 246);
+}
+</style>
