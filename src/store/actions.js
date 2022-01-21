@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import router from '@/router';
 
 export default {
     async login_User({dispatch, commit }, { email, password} ){
@@ -9,6 +8,7 @@ export default {
                 .signInWithEmailAndPassword(email, password)
             const { email: emailUser } = userCredential.user;
             dispatch("fetch_User", emailUser);
+            return true
         } catch (error) {
             const { code } = error;
             console.log(code);
@@ -70,11 +70,9 @@ export default {
         try {
             commit("SET_OUT_USER", user);
             firebase.auth().signOut();
-            alert('Desloageado con exito')
-            
          } catch (error) {
              const { code } = error;
              console.log(code);
          }
-    }
+    },
 }

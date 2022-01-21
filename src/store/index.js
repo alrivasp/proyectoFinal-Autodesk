@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // Persisted
-import createPersistedState from 'vuex-persistedstate'; 
+import createPersistedState from 'vuex-persistedstate';
 
 // Modules local
 import state from './state'

@@ -12,5 +12,6 @@ export default {
         password: '',
         status: ''
     },
-    disconnected: true
+    disconnected: true,
+    notification: null
 }

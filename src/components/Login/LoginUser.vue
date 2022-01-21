@@ -3,7 +3,7 @@
     <!-- Formulario login start-->
     <form class="text-center formLogin mt-5">
       <!-- Input email start -->
-      <div class="inner-addon left-addon mb-4 shadow-lg">
+      <div class="inner-addon left-addon mb-4">
         <font-awesome-icon
           class="glyphicon glyphicon-user"
           icon="fa-solid fa-user"
@@ -18,7 +18,7 @@
       </div>
       <!-- Input email end -->
       <!-- Input password start-->
-      <div class="inner-addon left-addon mb-4 shadow-lg">
+      <div class="inner-addon left-addon mb-4">
         <font-awesome-icon
           class="glyphicon glyphicon-user"
           icon="fa-solid fa-key"
@@ -33,17 +33,22 @@
         />
       </div>
       <!-- Input email end -->
+      <!-- Boton login start-->
       <div class="d-grid gap-2 shadow-lg">
-        <button @click="userLogin" class="btn btn-primary rounded-pill">INGRESAR</button>
+        <button type="submit" @click="userLogin" class="btn btn-primary rounded-pill" >INGRESAR</button>
       </div>
-      <!-- Boton login -->
+      <div v-if="notificationLocal" class="mt-2 validateInput">
+        <font-awesome-icon icon="fa-exclamation-triangle" />
+        <strong> {{messageLocal}}</strong>
+      </div>
+      <!-- Boton login end-->
     </form>
     <!-- Formulario login end -->
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "LoginUser",
@@ -53,23 +58,56 @@ export default {
         email: "",
         password: "",
       },
+      notificationLocal: false,
+      messageLocal: ''
     };
   },
   methods: {
     ...mapActions(["login_User"]),
     clearInput() {
-      (this.user = ""), (this.password = "");
+      this.user = "", 
+      this.password = "",
+      this.notificationLocal = false,
+      this.messageLocal = ''
     },
     userLogin() {
-      const formData = this.user;
-      this.login_User(formData);
-      this.clearInput();
+      if (this.validation()) {
+        const formData = this.user;
+        this.login_User(formData);
+        this.clearInput();
+      }
+    },
+    validation(){
+      let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+      if(!emailRegex.test(this.user.email)){
+        this.messageLocal = 'Fomato de correo Incorrecto'
+        this.notificationLocal = true;
+        return false;
+      }else if(this.user.password.length < 6){
+        this.messageLocal = 'Password debe tener 6 o mas caracteres'
+        this.notificationLocal = true;
+        return false;
+      }else{
+        return true;
+      }
+    }
+  },
+  computed: {
+    validationButton() {
+      if (this.user.email.length > 0 && this.user.password.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };
 </script>
 
 <style>
+.validateInput {
+  color: white;
+}
 .inner-addon {
   position: relative;
 }

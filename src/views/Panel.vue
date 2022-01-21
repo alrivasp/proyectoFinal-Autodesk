@@ -10,25 +10,37 @@
 </template>
 
 <script>
-import PanelUser from '../components/Panel/user/PanelUser.vue';
-import PanelAdmin from '../components/Panel/admin/PanelAdmin.vue';
-import PanelTechnical from '../components/Panel/technical/PanelTechnical.vue';
+import PanelUser from "../components/Panel/user/PanelUser.vue";
+import PanelAdmin from "../components/Panel/admin/PanelAdmin.vue";
+import PanelTechnical from "../components/Panel/technical/PanelTechnical.vue";
 
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Panel",
-  components:{
+  components: {
     PanelUser,
     PanelTechnical,
-    PanelAdmin, 
+    PanelAdmin,
+  },
+  methods: {
+    ...mapMutations(["CLEAN_NOTIFICATION"]),
   },
   computed: {
-    ...mapState(["currentUser"]),
-  }
+    ...mapState(["currentUser", "notification"]),
+  },
+  mounted() {
+    if (this.notification) {
+      this.flashMessage.success({
+        title: this.notification.title,
+        message: this.notification.message,
+        icon: this.notification.icon,
+      });
+      this.CLEAN_NOTIFICATION();
+    }
+  },
 };
 </script>
 
 <style scoped>
-
 </style>
