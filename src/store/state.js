@@ -13,5 +13,6 @@ export default {
         status: ''
     },
     disconnected: true,
-    notification: null
+    notification: null,
+    notificationLogin: ''
 }

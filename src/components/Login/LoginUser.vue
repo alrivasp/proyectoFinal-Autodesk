@@ -9,7 +9,7 @@
           icon="fa-solid fa-user"
         />
         <input
-          v-model="user.email"
+          v-model="email"
           type="email"
           class="form-control rounded-pill"
           placeholder="Email"
@@ -24,7 +24,7 @@
           icon="fa-solid fa-key"
         />
         <input
-          v-model="user.password"
+          v-model="password"
           type="password"
           class="form-control rounded-pill"
           placeholder="Password"
@@ -43,47 +43,48 @@
       </div>
       <!-- Boton login end-->
     </form>
+    <strong v-if="loginFailed" class="mt-2 validateInput"><font-awesome-icon icon="fa-exclamation-triangle" /> {{loginFailed}}</strong>
     <!-- Formulario login end -->
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
   name: "LoginUser",
   data() {
     return {
-      user: {
-        email: "",
-        password: "",
-      },
+      email: "",
+      password: "",
       notificationLocal: false,
       messageLocal: ''
     };
   },
   methods: {
     ...mapActions(["login_User"]),
+    ...mapMutations(["CLEAN_NOTIFICATION_LOGIN"]),
     clearInput() {
-      this.user = "", 
+      this.email = "", 
       this.password = "",
       this.notificationLocal = false,
       this.messageLocal = ''
     },
     userLogin() {
       if (this.validation()) {
-        const formData = this.user;
+        const formData = { email: this.email, password: this.password };
         this.login_User(formData);
         this.clearInput();
       }
+      this.CLEAN_NOTIFICATION_LOGIN();
     },
     validation(){
       let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-      if(!emailRegex.test(this.user.email)){
+      if(!emailRegex.test(this.email)){
         this.messageLocal = 'Fomato de correo Incorrecto'
         this.notificationLocal = true;
         return false;
-      }else if(this.user.password.length < 6){
+      }else if(this.password.length < 6){
         this.messageLocal = 'Password debe tener 6 o mas caracteres'
         this.notificationLocal = true;
         return false;
@@ -92,15 +93,12 @@ export default {
       }
     }
   },
-  computed: {
-    validationButton() {
-      if (this.user.email.length > 0 && this.user.password.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-  },
+  computed:{
+    ...mapState(["notificationLogin"]),
+    loginFailed(){
+      return this.notificationLogin;
+    }
+  }
 };
 </script>
 

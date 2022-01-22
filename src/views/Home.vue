@@ -40,7 +40,6 @@
 <script>
 import LoginUser from "@/components/Login/LoginUser.vue";
 import Footer from "@/components/Footer/Footer.vue";
-import { mixins } from "../mixins/mixins";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -49,7 +48,6 @@ export default {
     LoginUser,
     Footer,
   },
-  mixins: [mixins],
   computed: {
     ...mapState(["disconnected"]),
   },

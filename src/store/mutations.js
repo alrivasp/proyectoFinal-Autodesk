@@ -20,5 +20,11 @@ export default {
     },
     CLEAN_NOTIFICATION(state){
         state.notification = null;
+    },
+    CLEAN_NOTIFICATION_LOGIN(state){
+        state.notificationLogin = '';
+    },
+    LOGIN_FAILED(state){
+        state.notificationLogin = 'Inicio de sesion fallido - usuario o password invalido.-'
     }
 }

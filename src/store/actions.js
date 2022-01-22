@@ -8,10 +8,10 @@ export default {
                 .signInWithEmailAndPassword(email, password)
             const { email: emailUser } = userCredential.user;
             dispatch("fetch_User", emailUser);
-            return true
         } catch (error) {
             const { code } = error;
             console.log(code);
+            commit("LOGIN_FAILED");
         }
     },
     fetch_User({commit}, email){
