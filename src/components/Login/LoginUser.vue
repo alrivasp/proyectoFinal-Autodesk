@@ -35,7 +35,7 @@
       <!-- Input email end -->
       <!-- Boton login start-->
       <div class="d-grid gap-2 shadow-lg">
-        <button type="submit" @click="userLogin" class="btn btn-primary rounded-pill" >INGRESAR</button>
+        <button @click="userLogin" class="btn btn-primary rounded-pill" >INGRESAR</button>
       </div>
       <div v-if="notificationLocal" class="mt-2 validateInput">
         <font-awesome-icon icon="fa-exclamation-triangle" />

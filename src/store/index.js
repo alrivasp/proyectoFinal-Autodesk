@@ -13,6 +13,7 @@ import getters from './getters'
 
 // Modules
 import Register from './Register/index'
+import Ticketera from './Ticketera/index'
 
 Vue.use(Vuex)
 
@@ -24,5 +25,6 @@ export default new Vuex.Store({
   getters,
   modules: {
     Register,
+    Ticketera,
   }
 })

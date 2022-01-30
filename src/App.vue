@@ -18,7 +18,7 @@
       </div>
     </div>
     <router-view />
-    <FlashMessage :position="'right top'" />
+    <FlashMessage :position="'right bottom'" />
   </div>
 </template>
 

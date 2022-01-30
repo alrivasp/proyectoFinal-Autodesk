@@ -12,6 +12,17 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import FlashMessage from '@smartweb/vue-flash-message';
+import moment from 'moment';
+import VueMoment from 'vue-moment';
+
+require('moment/locale/es')
+moment.locale('es')
+
+Vue.filter('formatDate', function (value){
+  if(value){
+    return moment(String(value)).format('DD/MM/YYYY')
+  }
+})
 
 library.add(fas, fab)
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -22,6 +33,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(FlashMessage)
+Vue.use(VueMoment, {moment})
 
 new Vue({
   router,

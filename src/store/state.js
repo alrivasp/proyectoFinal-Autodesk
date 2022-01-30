@@ -1,5 +1,6 @@
 export default {
     currentUser: {
+        id: '',
         name: '',
         lastName: '',
         email: '',
@@ -14,5 +15,5 @@ export default {
     },
     disconnected: true,
     notification: null,
-    notificationLogin: ''
+    notificationLogin: '',
 }
