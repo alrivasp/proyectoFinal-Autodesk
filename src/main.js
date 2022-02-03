@@ -14,6 +14,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import FlashMessage from '@smartweb/vue-flash-message';
 import moment from 'moment';
 import VueMoment from 'vue-moment';
+import { Chart } from 'chart.js';
+import Chartkick from 'vue-chartkick';
 
 require('moment/locale/es')
 moment.locale('es')
@@ -34,6 +36,7 @@ Vue.use(IconsPlugin)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(FlashMessage)
 Vue.use(VueMoment, {moment})
+Vue.use(Chartkick.use(Chart));
 
 new Vue({
   router,

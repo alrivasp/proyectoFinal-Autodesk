@@ -20,7 +20,7 @@ export const mixins = {
             return word[0].toUpperCase() + word.slice(1);
         },
         dateToday(){
-            let format = 'dd/mm/yyyy'
+            let format = 'yyyy-mm-dd'
             const today = new Date();
             const map = {
                 dd: today.getDate(),

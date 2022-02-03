@@ -35,5 +35,21 @@ export default {
             icon: 'https://smwbtech.github.io/vue-flash-message/success.svg'
         }
         commit("ADD_TICKET", notificaction);
+    },
+    fetch_Technical({ commit }){
+        commit("SET_LOADING", true);
+        firebase
+            .firestore()
+            .collection("users")
+            .onSnapshot((snapshot) => {
+                const technicals = [];
+                snapshot.forEach((doc) => {
+                    if(doc.data().role === "technical"){
+                        technicals.push({ id: doc.id, data: doc.data() });
+                    }
+                });
+                commit("SET_LOADING", false);
+                commit("SET_TECHNICAL", technicals);
+            });
     }
 };

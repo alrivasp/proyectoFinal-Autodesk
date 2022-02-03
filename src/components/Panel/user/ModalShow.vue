@@ -108,17 +108,19 @@
                 ><strong>SLA dias: </strong>{{ ticketSelected.data.sla }}</span
               >
             </div>
-            <div class="col-3 border bg-vigente" v-if="calculationSla(ticketSelected.data.dateTimeStart, ticketSelected.data.sla)" >
-              <span
-                ><strong>Estado/SLA: </strong
-                >A TIEMPO</span
-              >
+            <div
+              class="col-3 border bg-vigente"
+              v-if="
+                calculationSla(
+                  ticketSelected.data.dateTimeStart,
+                  ticketSelected.data.sla
+                )
+              "
+            >
+              <span><strong>Estado/SLA: </strong>A TIEMPO</span>
             </div>
             <div class="col-3 border bg-vencido" v-else>
-              <span
-                ><strong>Estado/SLA: </strong
-                >VENCIDO</span
-              >
+              <span><strong>Estado/SLA: </strong>VENCIDO</span>
             </div>
           </div>
           <div class="row shadow">
@@ -131,6 +133,30 @@
           </div>
         </div>
         <!-- info tkt end-->
+        <!-- info tecnico end-->
+        <div class="mt-5">
+          <div class="row shadow">
+            <div class="col-4 border info">
+              <span
+                ><strong>Tecnico responsable: </strong
+                >{{ technical[0].data.name }} {{ technical[0].data.lastName }}</span
+              >
+            </div>
+            <div class="col-4 border info">
+              <span
+                ><strong>Email: </strong
+                >{{ technical[0].data.email }}</span
+              >
+            </div>
+            <div class="col-4 border info">
+              <span
+                ><strong>Telefono: </strong
+                >{{ technical[0].data.phone }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <!-- info tecnico end-->
       </div>
       <hr />
       <div>
@@ -157,6 +183,7 @@ export default {
   mixins: [mixins],
   props: {
     ticketSelected: Object,
+    technical: Array,
   },
   data() {
     return {};
@@ -171,10 +198,10 @@ export default {
 .info:hover {
   background-color: rgb(216, 216, 216);
 }
-.bg-vigente{
-    background-color: rgb(41, 223, 116);
+.bg-vigente {
+  background-color: rgb(41, 223, 116);
 }
-.bg-vencido{
-    background-color: rgb(236, 74, 25);
+.bg-vencido {
+  background-color: rgb(236, 74, 25);
 }
 </style>

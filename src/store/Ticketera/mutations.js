@@ -13,4 +13,7 @@ export default {
     SET_TICKETS(state, tickets){
         state.tickets = tickets;
     },
+    SET_TECHNICAL(state, technicals){
+        state.technicals = technicals
+    }
 }

@@ -73,7 +73,7 @@
                   <td v-else>-</td>
                   <!-- If end-->
                   <td>
-                    <ModalShow :ticketSelected="tkt"/>
+                    <ModalShow :ticketSelected="tkt" :technical="getTechnical(tkt.data.technicalId)"/>
                     <ModalEdit :ticketSelected="tkt"/>
                     <ModalDelete :ticketSelected="tkt"/>
                   </td>
@@ -262,7 +262,7 @@ export default {
   },
   mixins: [mixins],
   methods: {
-    ...mapActions("Ticketera", ["add_Ticket", "fetch_Tickets"]),
+    ...mapActions("Ticketera", ["add_Ticket", "fetch_Tickets", "fetch_Technical"]),
     ...mapMutations("Ticketera", ["CLEAN_NOTIFICATION"]),
     newTicket() {
       const ticket = {
@@ -304,11 +304,15 @@ export default {
       });
       this.cleanFormTicket();
       this.$bvModal.hide("bv-modal-new");
+    },
+    getTechnical(technicalId){
+      const result = this.technicals.filter(tech => tech.id == technicalId ) 
+      return result;
     }
   },
   computed: {
     ...mapState(["currentUser"]),
-    ...mapState("Ticketera", ["notification"]),
+    ...mapState("Ticketera", ["notification", "technicals"]),
     ...mapGetters("Ticketera", ["getTickets", "getNumberTicket"]),
     supportServiceC() {
       return this.typeService;
@@ -357,6 +361,7 @@ export default {
     this.lastname = this.currentUser.lastName;
     this.rut = this.currentUser.rut;
     this.fetch_Tickets();
+    this.fetch_Technical();
   },
   updated() {
     // Notificaciones

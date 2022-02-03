@@ -14,6 +14,7 @@ import getters from './getters'
 // Modules
 import Register from './Register/index'
 import Ticketera from './Ticketera/index'
+import DashboardUser from './DashboardUser/index'
 
 Vue.use(Vuex)
 
@@ -26,5 +27,6 @@ export default new Vuex.Store({
   modules: {
     Register,
     Ticketera,
+    DashboardUser,
   }
 })
