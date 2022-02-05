@@ -263,7 +263,7 @@ export default {
   mixins: [mixins],
   methods: {
     ...mapActions("Ticketera", ["add_Ticket", "fetch_Tickets", "fetch_Technical"]),
-    ...mapMutations("Ticketera", ["CLEAN_NOTIFICATION"]),
+    ...mapMutations("Ticketera", ["CLEAN_NOTIFICATION", "SET_NETXTURN"]),
     newTicket() {
       const ticket = {
         userId: this.currentUser.id,
@@ -278,7 +278,7 @@ export default {
         sla: this.fetchSla(this.typeServiceSelected),
         resolution: "",
         ticketStatus: "Ingresado",
-        technicalId: "",
+        technicalId: this.assignment(),
       };
       this.add_Ticket(ticket);
       this.cleanFormTicket();
@@ -308,11 +308,33 @@ export default {
     getTechnical(technicalId){
       const result = this.technicals.filter(tech => tech.id == technicalId ) 
       return result;
+    },
+    assignment(){
+      // agrupar id de tecnicos
+      let idTechnicals = [];
+      let id = '';
+      for (const key in this.technicals) {
+        idTechnicals.push(this.technicals[key].id)
+      }
+      // validar variable assignmentShift
+      if (this.assignmentShift == 0){
+        id = idTechnicals[0];
+        this.SET_NETXTURN(1);
+      }else if(this.assignmentShift == (idTechnicals.length - 1) ){
+        id = idTechnicals[idTechnicals.length - 1];
+        this.SET_NETXTURN(0);
+      }else {
+        let currentTurn = this.assignmentShift;
+        let nextTurn = currentTurn + 1;
+        id = idTechnicals[currentTurn];
+        this.SET_NETXTURN(nextTurn);
+      }
+      return id
     }
   },
   computed: {
     ...mapState(["currentUser"]),
-    ...mapState("Ticketera", ["notification", "technicals"]),
+    ...mapState("Ticketera", ["notification", "technicals", "assignmentShift"]),
     ...mapGetters("Ticketera", ["getTickets", "getNumberTicket"]),
     supportServiceC() {
       return this.typeService;

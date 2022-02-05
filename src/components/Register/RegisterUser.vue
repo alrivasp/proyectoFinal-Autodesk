@@ -2,75 +2,119 @@
   <div class="container">
     <div class="cardRegistro">
       <v-card elevation="24" loading outlined shaped>
-        <div class="" style="display: flex;">
-          <div class="" style="display: flex; justify-content: flex-start;" >
-            <img class="iconAutodesk" src="../../assets/img/autodesk.png" alt="icono autodesk">
+        <div class="" style="display: flex">
+          <div class="" style="display: flex; justify-content: flex-start">
+            <img
+              class="iconAutodesk"
+              src="../../assets/img/autodesk.png"
+              alt="icono autodesk"
+            />
           </div>
-          <div class="" style="display: flex; justify-content: left; align-items: center; margin-top: 20px;">
+          <div
+            class=""
+            style="
+              display: flex;
+              justify-content: left;
+              align-items: center;
+              margin-top: 20px;
+            "
+          >
             <span class="titleRegister">Registro</span>
           </div>
         </div>
-        <form class="px-5 pb-4">
+        <v-form ref="form" v-model="valid" lazy-validation class="mx-5 px-5">
           <v-text-field
-            v-model="user.name"
+            v-model="name"
             :counter="20"
+            :rules="nameRules"
             label="Nombre"
             required
           ></v-text-field>
+
           <v-text-field
-            v-model="user.lastName"
+            v-model="lastName"
             :counter="20"
+            :rules="lastNameRules"
             label="Apellido"
             required
           ></v-text-field>
+
           <v-text-field
-            v-model="user.email"
+            v-model="email"
+            :rules="emailRules"
             label="E-mail"
             required
           ></v-text-field>
+
           <v-text-field
-            v-model="user.rut"
-            :counter="20"
+            v-model="rut"
+            :counter="13"
+            :rules="rutRules"
             label="Rut"
             required
-            placeholder="11.111.111-k"
           ></v-text-field>
+
           <v-text-field
-            v-model="user.position"
-            :counter="20"
+            v-model="position"
+            :counter="30"
+            :rules="positionRules"
             label="Cargo"
             required
           ></v-text-field>
+
           <v-text-field
-            v-model="user.phone"
-            :counter="9"
+            v-model="phone"
+            :counter="13"
+            :rules="phoneRules"
             label="Telefono"
             required
           ></v-text-field>
+
           <v-text-field
-            v-model="user.company"
+            v-model="company"
             :counter="20"
-            label="Empresa"
+            :rules="companyRules"
+            label="Compañia"
             required
           ></v-text-field>
+
           <v-text-field
-            v-model="user.city"
-            :counter="20"
+            v-model="city"
+            :counter="30"
+            :rules="cityRules"
             label="Ciudad"
             required
           ></v-text-field>
+
           <v-text-field
-            v-model="user.password"
-            type="password"
+            v-model="password"
+            :rules="passwordRules"
             label="Password"
+            type="password"
             required
           ></v-text-field>
-          <div class="d-grid gap-2 mt-4">
-            <button @click="registerUser" class="btn btn-primary btn-sm">
-              <strong> REGISTRAR </strong>
-            </button>
-          </div>
-        </form>
+
+          <v-btn :disabled="!valid" class="mr-4 bg-info" @click="validate">
+            Validar
+          </v-btn>
+
+          <v-btn color="error" class="mr-4 bg-danger mx-1" @click="reset">
+            Reset Form</v-btn
+          >
+
+          <v-btn color="warning" class="bg-warning" @click="resetValidation">
+            Reset Validacion
+          </v-btn>
+        </v-form>
+        <div class="d-grid gap-2 mt-4">
+          <button
+            @click="registerUser"
+            class="btn btn-primary btn-sm"
+            :disabled="!validRegister"
+          >
+            <strong> REGISTRAR </strong>
+          </button>
+        </div>
       </v-card>
     </div>
     <Footer />
@@ -86,42 +130,132 @@ export default {
   components: { Footer },
   data() {
     return {
-      user: {
-        name: '',
-        lastName: '',
-        email: '',
-        rut: '',
-        role: 'user',
-        position: '',
-        phone: '',
-        company: '',
-        city: '',
-        password: '',
-        status: 'active'
-      },
+      valid: true,
+      name: "",
+      nameRules: [
+        (v) => !!v || "Nombre es requerido",
+        (v) =>
+          (v && v.length <= 20) ||
+          "Nombre debe tener como maximo 20 caracteres",
+      ],
+      lastName: "",
+      lastNameRules: [
+        (v) => !!v || "Apellido es requerido",
+        (v) =>
+          (v && v.length <= 20) ||
+          "Apellido debe tener como maximo 20 caracteres",
+      ],
+      email: "",
+      emailRules: [
+        (v) => !!v || "E-mail es requerido",
+        (v) => /.+@.+\..+/.test(v) || "E-mail debe ser valido",
+      ],
+      rut: "",
+      rutRules: [
+        (v) => !!v || "Rut es requerido",
+        (v) =>
+          (v && v.length <= 13) || "Rut debe tener como maximo 13 caracteres",
+      ],
+      position: "",
+      positionRules: [
+        (v) => !!v || "Cargo es requerido",
+        (v) =>
+          (v && v.length <= 30) || "Cargo debe tener como maximo 30 caracteres",
+      ],
+      phone: "",
+      phoneRules: [
+        (v) => !!v || "Telefono es requerido",
+        (v) =>
+          (v && v.length <= 13) ||
+          "Telefono debe tener como maximo 13 caracteres",
+      ],
+      company: "",
+      companyRules: [
+        (v) => !!v || "Compañia es requerido",
+        (v) =>
+          (v && v.length <= 20) ||
+          "Compañia debe tener como maximo 20 caracteres",
+      ],
+      city: "",
+      cityRules: [
+        (v) => !!v || "Ciudad es requerido",
+        (v) =>
+          (v && v.length <= 30) ||
+          "Ciudad debe tener como maximo 30 caracteres",
+      ],
+      password: "",
+      passwordRules: [
+        (v) => !!v || "Password es requerido",
+        (v) =>
+          (v && v.length >= 6) ||
+          "Password debe tener mas de 6 caracteres",
+      ],
     };
   },
   methods: {
     ...mapActions("Register", ["register_User"]),
     clearInput() {
-      this.user.name = '', 
-      this.user.lastName = '',
-      this.user.email = '',
-      this.user.rut = '',
-      this.user.role = 'user',
-      this.user.position = '',
-      this.user.phone = '',
-      this.user.company = '',
-      this.user.city = '',
-      this.user.password = '',
-      this.user.status = 'active'
+      (this.name = ""),
+        (this.lastName = ""),
+        (this.email = ""),
+        (this.rut = ""),
+        (this.role = "user"),
+        (this.position = ""),
+        (this.phone = ""),
+        (this.company = ""),
+        (this.city = ""),
+        (this.password = ""),
+        (this.status = "active");
     },
     registerUser() {
-      const formData = this.user;
+      const formData = {
+        name: this.name,
+        lastName: this.lastName,
+        email: this.email,
+        rut: this.rut,
+        role: "user",
+        position: this.position,
+        phone: this.phone,
+        company: this.company,
+        city: this.city,
+        password: this.password,
+        status: "active"
+      }
       this.register_User(formData);
       this.clearInput();
+      this.flashMessage.success({
+        title: 'Registro de usuario',
+        message: 'Usuario registrado correctamente',
+        icon: 'https://smwbtech.github.io/vue-flash-message/success.svg'
+      });
+    },
+    validate() {
+      this.$refs.form.validate();
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
     },
   },
+  computed:{
+    validRegister(){
+      if(this.name == "" ||
+      this.lastName == "" ||
+      this.email == "" ||
+      this.rut == "" ||
+      this.position == "" ||
+      this.phone == "" ||
+      this.company == "" ||
+      this.city == "" ||
+      this.password == ""){
+        return false
+      }else{
+      return true
+      }
+    }
+  }
 };
 </script>
 

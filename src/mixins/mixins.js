@@ -5,17 +5,6 @@ import moment from 'moment';
 
 export const mixins = {
     methods: {
-        logout() {
-            try {
-                firebase.auth().signOut();
-                Store.state.disconnected = true;
-                router.push('/').catch(() => { });
-                alert('Desloageado con exito')
-            } catch (error) {
-                const { code } = error;
-                console.log(code);
-            }
-        },
         capitalize(word) {
             return word[0].toUpperCase() + word.slice(1);
         },

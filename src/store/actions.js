@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import axios from "axios"
 
 export default {
     async login_User({dispatch, commit }, { email, password} ){
@@ -75,4 +76,18 @@ export default {
              console.log(code);
          }
     },
+    update_User({ commit }, { id, data }) {
+        try {
+            firebase.firestore().collection("users").doc(id).set(data);    
+            commit("UPDATE_USER", data);
+        } catch (error) {
+            const { code } = error;
+            console.log(code);
+        }
+        
+    },
+    async fetch_Clima({ commit }){
+        const { data } = await axios.get('https://api.gael.cloud/general/public/clima');
+        commit("SET_CLIMA", data);
+    }
 }

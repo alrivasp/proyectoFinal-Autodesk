@@ -18,10 +18,13 @@ export default {
     add_User({ commit }, userRegister){
         try {
             firebase.firestore().collection("users").add(userRegister);
+            setTimeout(function(){
+                firebase.auth().signOut();
+            }, 2000);
         } catch (error) {
             const { code } = error;
             console.log(code)
         }
         
-    },
+    }
 }

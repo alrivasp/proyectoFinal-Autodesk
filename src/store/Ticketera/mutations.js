@@ -15,5 +15,8 @@ export default {
     },
     SET_TECHNICAL(state, technicals){
         state.technicals = technicals
+    },
+    SET_NETXTURN(state, position){
+        state.assignmentShift = position
     }
 }

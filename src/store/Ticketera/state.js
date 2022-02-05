@@ -4,4 +4,5 @@ export default {
     loading: false,
     tktSearch: '',
     technicals: [],
+    assignmentShift: 0
 }

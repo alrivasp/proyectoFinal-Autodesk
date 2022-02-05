@@ -16,7 +16,8 @@ export default {
     SET_OUT_USER(state, user){
         state.currentUser = user;
         state.disconnected = true;
-        router.push('/').catch(() => {});
+        location.reload();
+        //router.push('/').catch(() => {});
     },
     CLEAN_NOTIFICATION(state){
         state.notification = null;
@@ -26,5 +27,21 @@ export default {
     },
     LOGIN_FAILED(state){
         state.notificationLogin = 'Inicio de sesion fallido - usuario o password invalido.-'
+    },
+    UPDATE_USER(state, data ){
+        state.currentUser.id = data.id;
+        state.currentUser.name = data.name;
+        state.currentUser.lastName = data.lastName;
+        state.currentUser.email = data.email;
+        state.currentUser.rut = data.rut;
+        state.currentUser.role = data.role;
+        state.currentUser.position = data.position;
+        state.currentUser.phone = data.phone;
+        state.currentUser.company = data.company;
+        state.currentUser.city = data.city;
+        state.currentUser.status = data.status;
+    },
+    SET_CLIMA(state, data){
+        state.clima = data;
     }
 }
