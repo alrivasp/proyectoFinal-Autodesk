@@ -28,7 +28,7 @@ Cada panel esta personalizado para que cada rol gestione e iteractue con el sist
 - Hosting Firebase.-
 - FontAwesome Libreria
 - FlashMessage Libreria
-- API https://api.gael.cloud/
+- API https://api.gael.cloud/ (Clima)
 - Moment.js (Hora) Libreria
 - Chart (Grafico) Libreria
 - Chartkick (Grafico) Libreria
