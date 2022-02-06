@@ -16,6 +16,8 @@ import Register from './Register/index'
 import Ticketera from './Ticketera/index'
 import DashboardUser from './DashboardUser/index'
 import DashboardTechnical from './DashboardTechnical/index'
+import DashboardAdmin from './DashboardAdmin/index'
+import Cuentas from './Cuentas/index'
 
 Vue.use(Vuex)
 
@@ -30,5 +32,7 @@ export default new Vuex.Store({
     Ticketera,
     DashboardUser,
     DashboardTechnical,
+    DashboardAdmin,
+    Cuentas
   }
 })

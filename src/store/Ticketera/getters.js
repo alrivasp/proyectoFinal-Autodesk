@@ -16,5 +16,9 @@ export default {
         let filteredStatus = filteredId.filter(t => t.data.ticketStatus === 'Ingresado' || t.data.ticketStatus === 'En proceso' || t.data.ticketStatus === 'Pausado' );
         filteredStatus.sort((a, b) => a.data.numberTicket > b.data.numberTicket);
         return filteredStatus;
+    },
+    getTicketsAdmin({ tickets }){
+        tickets.sort((a, b) => a.data.numberTicket > b.data.numberTicket);
+        return tickets;
     }
 }

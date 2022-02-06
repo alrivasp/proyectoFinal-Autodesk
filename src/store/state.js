@@ -16,5 +16,5 @@ export default {
     disconnected: true,
     notification: null,
     notificationLogin: '',
-    clima: []
+    clima: [],
 }
