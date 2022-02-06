@@ -1,21 +1,21 @@
 <template>
   <span>
     <b-button
-      class="btn btn-info btn-sm"
+      class="btn btn-success btn-sm"
       id="show-btn"
-      @click="$bvModal.show(`show-${ticketSelected.id}`)"
+      @click="$bvModal.show(`gestion-${ticketSelected.id}`)"
     >
-      Detalle
+      Gestionar TKT
     </b-button>
 
-    <b-modal :id="`show-${ticketSelected.id}`" hide-footer size="xl">
+    <b-modal :id="`gestion-${ticketSelected.id}`" hide-footer size="xl">
       <template #modal-title>
         <font-awesome-icon
           class="glyphicon glyphicon-user mx-2"
-          icon="fa-solid fa-eye"
+          icon="fa-solid fa-sync"
         />
         <strong
-          >Ver detalle Ticket N° {{ ticketSelected.data.numberTicket }}</strong
+          >Gestion de Ticket N° {{ ticketSelected.data.numberTicket }}</strong
         >
       </template>
       <div class="d-block p-4">
@@ -124,14 +124,6 @@
               <span><strong>Estado/SLA: </strong>VENCIDO</span>
             </div>
           </div>
-          <div class="row shadow">
-            <div class="col-12 border info">
-              <span
-                ><strong>Comentario/Resolucion: </strong
-                >{{ ticketSelected.data.resolution }}</span
-              >
-            </div>
-          </div>
         </div>
         <!-- info tkt end-->
         <!-- info tecnico end-->
@@ -140,34 +132,59 @@
             <div class="col-4 border info">
               <span
                 ><strong>Tecnico responsable: </strong
-                >{{ technical[0].data.name }} {{ technical[0].data.lastName }}</span
+                >{{ technical[0].data.name }}
+                {{ technical[0].data.lastName }}</span
               >
             </div>
             <div class="col-4 border info">
-              <span
-                ><strong>Email: </strong
-                >{{ technical[0].data.email }}</span
-              >
+              <span><strong>Email: </strong>{{ technical[0].data.email }}</span>
             </div>
             <div class="col-4 border info">
               <span
-                ><strong>Telefono: </strong
-                >{{ technical[0].data.phone }}</span
+                ><strong>Telefono: </strong>{{ technical[0].data.phone }}</span
               >
             </div>
           </div>
         </div>
         <!-- info tecnico end-->
-      </div>
-      <hr />
-      <div>
-        <div class="d-grid gap-2">
+        <!-- Resolution start-->
+        <div class="mt-4">
+          <div class="row">
+            <div class="col-3">
+              <v-select
+                v-model="tkt.ticketStatus"
+                :items="items"
+                label="Seleccione Estado"
+                solo
+              ></v-select>
+            </div>
+            <div class="col">
+              <v-textarea
+                v-model="tkt.resolution"
+                solo
+                name="input-7-4"
+                label="Resulucion / Comentario"
+              ></v-textarea>
+            </div>
+          </div>
+        </div>
+        <!-- Resolution end-->
+        <hr />
+        <div class="text-center">
           <button
-            class="btn btn-success"
+            class="btn btn-info btn-modal mx-2 shadow"
             type="button"
-            @click="$bvModal.hide(`show-${ticketSelected.id}`)"
+            @click="$bvModal.hide(`gestion-${ticketSelected.id}`)"
           >
             Cerrar
+          </button>
+          <button
+            :disabled="validateResolution"
+            class="btn btn-success btn-modal mx-2 shadow"
+            type="button"
+            @click="editTkt"
+          >
+            Guardar
           </button>
         </div>
       </div>
@@ -176,26 +193,64 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import { mixins } from "../../../mixins/mixins";
 
 export default {
-  name: "ModalShow",
+  name: "ModalGestion",
   mixins: [mixins],
   props: {
     ticketSelected: Object,
     technical: Array,
   },
   data() {
-    return {};
+    return {
+      tkt: [],
+      before: [],
+      items: ["Ingresado","En proceso", "Pausado", "Cerrado", "Cancelado"],
+    };
+  },
+  methods: {
+    ...mapActions(["update_Tkt"]),
+    editTkt() {
+      if(this.tkt.ticketStatus == 'Cerrado' || this.tkt.ticketStatus == 'Cancelado'){ this.tkt.dateTimeEnd = this.dateToday(); }
+      const { ticketStatus } = this.tkt.ticketStatus;
+      this.before.ticketStatus = ticketStatus;
+      const formData = { id: this.ticketSelected.id, data: this.tkt };
+      this.update_Tkt(formData);
+      this.flashMessage.success({
+        title: "Gestion de TKT",
+        message: `Tkt N°${this.tkt.numberTicket} cambio su estado a ${this.tkt.ticketStatus} correctamente`,
+        icon: "https://smwbtech.github.io/vue-flash-message/success.svg",
+      });
+      this.$bvModal.hide(`gestion-${this.ticketSelected.id}`)
+    },
   },
   computed: {
     ...mapState(["currentUser"]),
+    validateResolution() {
+      let result = true;
+      for (const key in this.tkt) {
+        if (this.tkt[key] != this.before[key]) {
+          result = false;
+          break;
+        }
+      }
+      return result;
+    },
+  },
+  mounted() {
+    let temp = { ...this.ticketSelected.data };
+    this.tkt = { ...temp };
+    this.before = { ...temp };
   },
 };
 </script>
 
 <style scoped>
+.btn-modal {
+  width: 45%;
+}
 .info:hover {
   background-color: rgb(216, 216, 216);
 }

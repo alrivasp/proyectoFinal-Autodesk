@@ -24,7 +24,7 @@ export const mixins = {
             if(type === "Hardware"){return 3}
             if(type === "Otros"){return 5}
         },
-        calculationSla(dateStart, sla){
+        calculationSla(dateStart, sla, dateEnd = ""){
             //FORMATO PARA MOMENT 2021-01-30
             //moment(dateStart).format('DD-MM-YYYY')
             const params = dateStart.split('-');
@@ -35,12 +35,22 @@ export const mixins = {
             const startParts = start.split('-');
             const nowDate = new Date(nowParts[0], nowParts[1] - 1, nowParts[2]);
             const startDate = new Date(startParts[0], startParts[1] - 1, startParts[2]);
-            let result = startDate >= nowDate
-            // si es true es vigente si es false es vencido
-            return result
+            
+            if(dateEnd.length === 0){
+                let result = startDate >= nowDate
+                return result
+            }else{
+                const temp = dateEnd.split('-');
+                const end = new Date(temp[0], temp[1] - 1, temp[2])
+                let result = startDate >= end
+                return result
+            }
+            
         },
         formatDate(date){
-            return moment(date).format('DD-MM-YYYY')
+            const params = date.split('-');
+            const dateConvert = new Date(params[0], params[1] - 1, params[2])
+            return moment(dateConvert).format('DD-MM-YYYY')
         }        
     }
 }

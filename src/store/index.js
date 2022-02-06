@@ -15,6 +15,7 @@ import getters from './getters'
 import Register from './Register/index'
 import Ticketera from './Ticketera/index'
 import DashboardUser from './DashboardUser/index'
+import DashboardTechnical from './DashboardTechnical/index'
 
 Vue.use(Vuex)
 
@@ -28,5 +29,6 @@ export default new Vuex.Store({
     Register,
     Ticketera,
     DashboardUser,
+    DashboardTechnical,
   }
 })

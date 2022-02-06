@@ -18,7 +18,7 @@
 
     <v-card-text class="pt-0">
       <div class="text-h6 font-weight-light mb-2">
-        Casos en estado <strong>En progreso</strong>
+        Casos en estado <strong>En proceso</strong>
       </div>
       <div class="indicator">
         <p>

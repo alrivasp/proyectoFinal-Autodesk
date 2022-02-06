@@ -10,5 +10,11 @@ export default {
         for (const key in tickets) { currentNumber.push(tickets[key].data.numberTicket)}
         let result = Math.max (...currentNumber)
         return result + 1;
+    },
+    getTicketsTechnical({ tickets }, {}, { currentUser }){
+        let filteredId = tickets.filter(t => t.data.technicalId == currentUser.id);
+        let filteredStatus = filteredId.filter(t => t.data.ticketStatus === 'Ingresado' || t.data.ticketStatus === 'En proceso' || t.data.ticketStatus === 'Pausado' );
+        filteredStatus.sort((a, b) => a.data.numberTicket > b.data.numberTicket);
+        return filteredStatus;
     }
 }

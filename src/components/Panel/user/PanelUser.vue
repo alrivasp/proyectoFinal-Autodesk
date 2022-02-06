@@ -7,8 +7,9 @@
       <button v-b-toggle.sidebar-1 class="navbar-brand col-md-0 me-0 px-3">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="w-100 titleCompany" v-if="this.ticketera">TICKETERA</div>
-      <div class="w-100 titleCompany" v-else>DASHBOARD</div>
+      <div class="w-100 titleCompany" v-show="this.ticketera">TICKETERA</div>
+      <div class="w-100 titleCompany" v-show="this.dashboard">DASHBOARD</div>
+      <div class="w-100 titleCompany" v-show="this.perfil">PERFIL</div>
       <b-button-group class="px-3 buttonNavBar">
         <b-dropdown
           :text="user"
@@ -54,16 +55,47 @@
         <!-- Clima -->
         <div class="row mt-2 clima" v-show="getClima.length > 0">
           <div class="col-7">
-            <span class="px-1"><strong>Ubicacion:</strong> {{getClima[0]['Estacion']}}</span><br>
-            <span class="px-1"><strong>Temperatura:</strong> {{getClima[0]['Temp']}}°</span><br>
-            <span class="px-1"><strong>Humedad:</strong> {{getClima[0]['Humedad']}}%</span><br>
-            <span class="px-1"><strong>Estado:</strong> {{getClima[0]['Estado']}}</span><br>
+            <span class="px-1"
+              ><strong>Ubicacion:</strong> {{ getClima[0]["Estacion"] }}</span
+            ><br />
+            <span class="px-1"
+              ><strong>Temperatura:</strong> {{ getClima[0]["Temp"] }}°</span
+            ><br />
+            <span class="px-1"
+              ><strong>Humedad:</strong> {{ getClima[0]["Humedad"] }}%</span
+            ><br />
+            <span class="px-1"
+              ><strong>Estado:</strong> {{ getClima[0]["Estado"] }}</span
+            ><br />
           </div>
           <div class="col-4 main">
-            <img class="main imgEfect" src="../../../assets/img/despejado.png" alt="foto_clima" width="70px" v-show="getClima[0]['Estado'] == 'Despejado'">
-            <img class="main imgEfect" src="../../../assets/img/pocasnubes.png" alt="foto_clima" width="70px" v-show="getClima[0]['Estado'] == 'Escasa nubosidad'">
-            <img class="main imgEfect" src="../../../assets/img/parcialalta.png" alt="foto_clima" width="70px" v-show="getClima[0]['Estado'] == 'Nubosidad parcial'">
-            <img class="main imgEfect" src="../../../assets/img/cubierto.png" alt="foto_clima" v-show="getClima[0]['Estado'] == 'Cubierto'">
+            <img
+              class="main imgEfect"
+              src="../../../assets/img/despejado.png"
+              alt="foto_clima"
+              width="70px"
+              v-show="getClima[0]['Estado'] == 'Despejado'"
+            />
+            <img
+              class="main imgEfect"
+              src="../../../assets/img/pocasnubes.png"
+              alt="foto_clima"
+              width="70px"
+              v-show="getClima[0]['Estado'] == 'Escasa nubosidad'"
+            />
+            <img
+              class="main imgEfect"
+              src="../../../assets/img/parcialalta.png"
+              alt="foto_clima"
+              width="70px"
+              v-show="getClima[0]['Estado'] == 'Nubosidad parcial'"
+            />
+            <img
+              class="main imgEfect"
+              src="../../../assets/img/cubierto.png"
+              alt="foto_clima"
+              v-show="getClima[0]['Estado'] == 'Cubierto'"
+            />
           </div>
         </div>
         <hr />
@@ -132,8 +164,8 @@ export default {
       const data = this.clima.filter(
         (item) => item["Estacion"] == this.currentUser.city
       );
-      
-      return data
+
+      return data;
     },
   },
   updated() {
@@ -160,7 +192,7 @@ export default {
 .main {
   transition: 1s;
 }
-.clima{
+.clima {
   font-size: 12px;
 }
 .footer {

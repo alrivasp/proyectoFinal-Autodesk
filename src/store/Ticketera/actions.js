@@ -51,5 +51,5 @@ export default {
                 commit("SET_LOADING", false);
                 commit("SET_TECHNICAL", technicals);
             });
-    }
+    },
 };

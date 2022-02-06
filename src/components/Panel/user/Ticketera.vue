@@ -58,7 +58,7 @@
                   <td v-else>{{ tkt.data.sla }} dia</td>
                   <!-- If end-->
                   <!-- If -->
-                  <td v-if="calculationSla(tkt.data.dateTimeStart, tkt.data.sla)"><p class="rounded-pill bg-success text-center statusSLA my-2"><strong>A Tiempo</strong></p></td>
+                  <td v-if="calculationSla(tkt.data.dateTimeStart, tkt.data.sla, tkt.data.dateTimeEnd)"><p class="rounded-pill bg-success text-center statusSLA my-2"><strong>A Tiempo</strong></p></td>
                   <td v-else><p class="rounded-pill bg-danger text-center statusSLA my-2"><strong> Vencido</strong></p></td>
                   <!-- If end-->
                   <td>{{ tkt.data.serviceType }}</td>

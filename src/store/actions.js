@@ -89,5 +89,13 @@ export default {
     async fetch_Clima({ commit }){
         const { data } = await axios.get('https://api.gael.cloud/general/public/clima');
         commit("SET_CLIMA", data);
+    },
+    update_Tkt({ commit }, { id, data }){
+        try {
+            firebase.firestore().collection("tickets").doc(id).set(data);    
+        } catch (error) {
+            const { code } = error;
+            console.log(code);
+        }
     }
 }

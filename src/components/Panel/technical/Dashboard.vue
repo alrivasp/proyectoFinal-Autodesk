@@ -136,11 +136,11 @@ export default {
   },
   
   methods: {
-    ...mapActions("DashboardUser", ["fetch_Tickets"]),
+    ...mapActions("DashboardTechnical", ["fetch_Tickets"]),
   },
   computed: {
-    ...mapState("DashboardUser", ["tickets"]),
-    ...mapGetters("DashboardUser", ["getHistoryTktUser", "getTotal", "getBeaten", "getInTime", "getTktSoftware", "getTktHardware", "getTktOther"]),
+    ...mapState("DashboardTechnical", ["tickets"]),
+    ...mapGetters("DashboardTechnical", ["getHistoryTktUser", "getTotal", "getBeaten", "getInTime", "getTktSoftware", "getTktHardware", "getTktOther"]),
     chartData(){
       return this.getHistoryTktUser
     },

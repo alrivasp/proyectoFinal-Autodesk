@@ -119,6 +119,7 @@ export default {
     ...mapActions(["update_User"]),
     editUser() {
       const formData = { id: this.currentUser.id, data: this.user };
+      this.before = { ...this.currentUser}
       this.update_User(formData);
       this.flashMessage.success({
         title: 'Perfil de usuario',
