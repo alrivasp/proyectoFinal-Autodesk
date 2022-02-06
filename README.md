@@ -11,21 +11,27 @@ Cada panel esta personalizado para que cada rol gestione e iteractue con el sist
 💻 Caracteristicas tecnicas:
 - HTML
 - CSS
-- VUETIFY
-- BOOTSTRAP
-- BOOTSTRAP.VUE
+- VUETIFY Libreria
+- BOOTSTRAP Libreria
+- BOOTSTRAP.VUE Libreria
 - SASS
 - JS
 - Vue 2.-
 - Vue CLI
-- Vue Route
-- VUEX
-- VUEX persistate
+- Vue Route Libreria
+- VUEX Libreria
+- VUEX persistate Libreria
 - Yarn
 - Webpack
 - Plataforma responsive .-
 - Persistencia de datos en firebase.
 - Hosting Firebase.-
+- FontAwesome Libreria
+- FlashMessage Libreria
+- API https://api.gael.cloud/
+- Moment.js (Hora) Libreria
+- Chart (Grafico) Libreria
+- Chartkick (Grafico) Libreria
 
 💥Imagenes:
 ![image](https://user-images.githubusercontent.com/45573547/150236665-19af6d4f-0fe5-4214-9018-bba8ef6d3972.png)
