@@ -8,6 +8,8 @@ El primer contacto el usuario se autogestiona ingresando el mismo su problematic
 Tiene acceso a 3 roles distintos Usuario, Tecnico y Administrador los cuales son 3 paneles distintos.
 Cada panel esta personalizado para que cada rol gestione e iteractue con el sistema.
 
+🖥 URL Deploy in firebase https://autodesk-80294.web.app/
+
 💻 Caracteristicas tecnicas:
 - HTML
 - CSS
@@ -26,6 +28,7 @@ Cada panel esta personalizado para que cada rol gestione e iteractue con el sist
 - Plataforma responsive .-
 - Persistencia de datos en firebase.
 - Hosting Firebase.-
+- Test E2E
 - FontAwesome Libreria
 - FlashMessage Libreria
 - API https://api.gael.cloud/ (Clima)
