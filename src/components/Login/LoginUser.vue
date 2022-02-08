@@ -9,6 +9,7 @@
           icon="fa-solid fa-user"
         />
         <input
+          id="inputUser"
           v-model="email"
           type="email"
           class="form-control rounded-pill"
@@ -24,6 +25,7 @@
           icon="fa-solid fa-key"
         />
         <input
+          id="inputPassword"
           v-model="password"
           type="password"
           class="form-control rounded-pill"
@@ -35,7 +37,7 @@
       <!-- Input email end -->
       <!-- Boton login start-->
       <div class="d-grid gap-2 shadow-lg">
-        <button @click="userLogin" class="btn btn-primary rounded-pill" >INGRESAR</button>
+        <button id="buttonLogin" @click="userLogin" class="btn btn-primary rounded-pill" >INGRESAR</button>
       </div>
       <div v-if="notificationLocal" class="mt-2 validateInput">
         <font-awesome-icon icon="fa-exclamation-triangle" />

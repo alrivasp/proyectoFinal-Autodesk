@@ -24,6 +24,7 @@
         </div>
         <v-form ref="form" v-model="valid" lazy-validation class="mx-5 px-5">
           <v-text-field
+            id="inputName"
             v-model="name"
             :counter="20"
             :rules="nameRules"
@@ -32,6 +33,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputLastName"
             v-model="lastName"
             :counter="20"
             :rules="lastNameRules"
@@ -40,6 +42,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputEmail"
             v-model="email"
             :rules="emailRules"
             label="E-mail"
@@ -47,6 +50,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputRut"
             v-model="rut"
             :counter="13"
             :rules="rutRules"
@@ -55,6 +59,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputPosition"
             v-model="position"
             :counter="30"
             :rules="positionRules"
@@ -63,6 +68,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputPhone"
             v-model="phone"
             :counter="13"
             :rules="phoneRules"
@@ -71,6 +77,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputCompany"
             v-model="company"
             :counter="20"
             :rules="companyRules"
@@ -79,6 +86,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputCity1"
             v-model="city"
             :counter="30"
             :rules="cityRules"
@@ -87,6 +95,7 @@
           ></v-text-field>
 
           <v-text-field
+            id="inputPassword"
             v-model="password"
             :rules="passwordRules"
             label="Password"

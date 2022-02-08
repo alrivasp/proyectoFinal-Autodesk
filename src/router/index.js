@@ -29,7 +29,11 @@ const routes = [
     meta: {
       restricted: true
     }
-  }
+  },
+  {
+    path: '*',
+    component: () => import('../views/NotFound.vue'),
+},
 ]
 
 const router = new VueRouter({
